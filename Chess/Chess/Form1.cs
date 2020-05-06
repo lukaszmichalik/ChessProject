@@ -26,7 +26,9 @@ namespace Chess
         }
 
         private void populateGrid()
-        {   
+        {
+            comboBox1.Text = "Skoczek";
+            comboBox2.Text = "Białe";
             //create buttons and place them into panel1
             int buttonSize = panel1.Width / myBoard.Size;
 
@@ -53,7 +55,6 @@ namespace Chess
                     // set the location of the new button.
                     btnGrid[i, j].Location = new Point(i* buttonSize, j* buttonSize);
 
-                    btnGrid[i, j].Text = i + "|" + j;
                     btnGrid[i, j].Tag = new Point(i, j);
 
                 }
@@ -66,6 +67,12 @@ namespace Chess
             var quinn = new Bitmap(Chess.Properties.Resources.Quinn);
             var greenDot = new Bitmap(Chess.Properties.Resources.GreenDot);
             var rookBlack = new Bitmap(Chess.Properties.Resources.RookBlack);
+            var rookWhite = new Bitmap(Chess.Properties.Resources.RookWhite);
+            var knightWhite = new Bitmap(Chess.Properties.Resources.KnigtWhite);
+            var knightBlack = new Bitmap(Chess.Properties.Resources.KnightBlack);
+            var bishopBlack = new Bitmap(Chess.Properties.Resources.BishopBlack);
+            var bishopWhite = new Bitmap(Chess.Properties.Resources.BishopWhite);
+            var quinnBlack = new Bitmap(Chess.Properties.Resources.QuinnBlack);
 
             //get the row and col number of the button clicked
             Button clickedButton = (Button)sender;
@@ -77,7 +84,7 @@ namespace Chess
             Cell currentCell = myBoard.theGrid[x, y];
 
             //determine legal next moves
-            myBoard.MarkNextLegalMove(currentCell, comboBox1.Text);
+            myBoard.MarkNextLegalMove(currentCell, comboBox1.Text, comboBox2.Text);
 
             //update the text on each button
 
@@ -85,39 +92,91 @@ namespace Chess
             {
                 for (int j = 0; j < myBoard.Size; j++)
                 {
-                    btnGrid[i, j].Text = "";
-                    btnGrid[i, j].Image = null;
-                    if (myBoard.theGrid[i, j].LegalNextMove == true)
+                    btnGrid[i, j].BackColor = default(Color);
+                    if (myBoard.theGrid[i, j].CurrentlyOccupied == false)
+                        btnGrid[i, j].Image = null;
+                    
+                    if (myBoard.theGrid[i, j].LegalNextMove == true && myBoard.theGrid[i, j].CurrentlyOccupied == false)
                     {
                         btnGrid[i, j].Image = greenDot;
                     }
-                    else if (myBoard.theGrid[i, j].CurrentlyOccupied == true)
+                    else if(myBoard.theGrid[i, j].LegalNextMove == true && myBoard.theGrid[i, j].CurrentlyOccupied == true && myBoard.theGrid[i, j].Color != comboBox2.Text)
                     {
-                        //btnGrid[i, j].Image = bmp;
-
-                        switch (comboBox1.Text)
+                        btnGrid[i, j].BackColor = Color.Red;
+                    }
+                    else if (myBoard.theGrid[i, j] == currentCell)
+                    {
+                        switch (comboBox2.Text)
                         {
-                            case "Knight":
+                            case "Białe":
+                                switch (comboBox1.Text)
+                                {
+                                    case "Skoczek":
+                                        btnGrid[i, j].Image = knightWhite;
+                                        break;
+
+                                    //case "King":
+                                    //    btnGrid[i, j].Image = king;
+                                    //    break;
+
+                                    case "Wieża":
+                                        btnGrid[i, j].Image = rookWhite;
+
+                                        break;
+
+                                    case "Goniec":
+
+                                        btnGrid[i, j].Image = bishopWhite;
+
+                                        break;
+
+                                    case "Hetman":
+                                        btnGrid[i, j].Image = quinn;
+
+                                        break;
+
+                                    default:
+
+                                        break;
+
+                                }
+
 
                                 break;
 
-                            case "King":
-                                btnGrid[i, j].Image = king;
-                                break;
+                            case "Czarne":
+                                switch (comboBox1.Text)
+                                {
+                                    case "Skoczek":
+                                        btnGrid[i, j].Image = knightBlack;
 
-                            case "Rook":
-                                btnGrid[i, j].Image = rookBlack;
+                                        break;
 
-                                break;
+                                    //case "King":
+                                      
+                                    //    break;
 
-                            case "Bishop":
+                                    case "Wieża":
+                                        btnGrid[i, j].Image = rookBlack;
 
-                                
+                                        break;
 
-                                break;
+                                    case "Goniec":
 
-                            case "Quinn":
-                                btnGrid[i, j].Image = quinn;
+                                        btnGrid[i, j].Image = bishopBlack;
+
+                                        break;
+
+                                    case "Hetman":
+                                        btnGrid[i, j].Image = quinnBlack;
+
+                                        break;
+
+                                    default:
+
+                                        break;
+
+                                }
 
                                 break;
 
@@ -126,13 +185,10 @@ namespace Chess
                                 break;
 
                         }
+                        
                     }
                 }
             }
-
-
-
-
 
 
         }

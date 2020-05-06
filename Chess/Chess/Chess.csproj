@@ -98,5 +98,23 @@
   <ItemGroup>
     <None Include="Resources\RookBlack.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KnigtWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BishopBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BishopWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KnightBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuinnBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RookWhite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

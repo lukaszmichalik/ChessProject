@@ -12,6 +12,7 @@ namespace ChessModel
         public int ColumnNumber { get; set; }
         public bool CurrentlyOccupied { get; set; }
         public bool LegalNextMove { get; set; }
+        public string Color { get; set; }
 
         public Cell (int x, int y)
         {
