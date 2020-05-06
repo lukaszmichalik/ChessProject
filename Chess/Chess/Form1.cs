@@ -62,7 +62,10 @@ namespace Chess
 
         private void Grid_Button_Click(object sender, EventArgs e)
         {
-            var bmp = new Bitmap(Chess.Properties.Resources.King);
+            var king = new Bitmap(Chess.Properties.Resources.King);
+            var quinn = new Bitmap(Chess.Properties.Resources.Quinn);
+            var greenDot = new Bitmap(Chess.Properties.Resources.GreenDot);
+            var rookBlack = new Bitmap(Chess.Properties.Resources.RookBlack);
 
             //get the row and col number of the button clicked
             Button clickedButton = (Button)sender;
@@ -86,11 +89,43 @@ namespace Chess
                     btnGrid[i, j].Image = null;
                     if (myBoard.theGrid[i, j].LegalNextMove == true)
                     {
-                        btnGrid[i, j].Text = "Legal";
+                        btnGrid[i, j].Image = greenDot;
                     }
                     else if (myBoard.theGrid[i, j].CurrentlyOccupied == true)
                     {
-                        btnGrid[i, j].Image = bmp;
+                        //btnGrid[i, j].Image = bmp;
+
+                        switch (comboBox1.Text)
+                        {
+                            case "Knight":
+
+                                break;
+
+                            case "King":
+                                btnGrid[i, j].Image = king;
+                                break;
+
+                            case "Rook":
+                                btnGrid[i, j].Image = rookBlack;
+
+                                break;
+
+                            case "Bishop":
+
+                                
+
+                                break;
+
+                            case "Quinn":
+                                btnGrid[i, j].Image = quinn;
+
+                                break;
+
+                            default:
+
+                                break;
+
+                        }
                     }
                 }
             }

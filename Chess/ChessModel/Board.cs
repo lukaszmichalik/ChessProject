@@ -12,6 +12,7 @@ namespace ChessModel
 
         public Cell[,] theGrid { get; set; }
 
+
         public Board (int s)
         {
             Size = s;
