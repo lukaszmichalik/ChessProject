@@ -62,6 +62,8 @@ namespace Chess
 
         private void Grid_Button_Click(object sender, EventArgs e)
         {
+            var bmp = new Bitmap(Chess.Properties.Resources.King);
+
             //get the row and col number of the button clicked
             Button clickedButton = (Button)sender;
             Point location = (Point)clickedButton.Tag;
@@ -70,9 +72,9 @@ namespace Chess
             int y = location.Y;
 
             Cell currentCell = myBoard.theGrid[x, y];
+
             //determine legal next moves
             myBoard.MarkNextLegalMove(currentCell, comboBox1.Text);
-           // comboBox1.Text
 
             //update the text on each button
 
@@ -81,13 +83,14 @@ namespace Chess
                 for (int j = 0; j < myBoard.Size; j++)
                 {
                     btnGrid[i, j].Text = "";
+                    btnGrid[i, j].Image = null;
                     if (myBoard.theGrid[i, j].LegalNextMove == true)
                     {
                         btnGrid[i, j].Text = "Legal";
                     }
                     else if (myBoard.theGrid[i, j].CurrentlyOccupied == true)
                     {
-                        btnGrid[i, j].Text = comboBox1.Text;
+                        btnGrid[i, j].Image = bmp;
                     }
                 }
             }
